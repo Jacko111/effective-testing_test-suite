@@ -26,7 +26,7 @@ public class TestLogin {
 	public void createPostShouldBeAvailable() {
 		driver.findElement(By.id("login")).click();
 		driver.findElement(By.id("email")).sendKeys("admin1@gmail.com");
-		driver.findElement(By.id("password")).sendKeys("admin1");
+		driver.findElement(By.id("password")).sendKeys("admin2");
 		driver.findElement(By.id("btn-submit")).click();
 		
 		driver.findElement(By.id("create_post")).click();
