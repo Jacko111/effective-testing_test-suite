@@ -1,6 +1,6 @@
 package com.effectivetesting.sanity;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,9 +9,10 @@ import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestLogin {
+public class TestWrongLogin {
 	private WebDriver driver;
 	
 	@Before
@@ -23,17 +24,16 @@ public class TestLogin {
 	}
 	
 	@Test
-	public void createPostShouldBeAvailable() {
+	public void TestWrongLogin() {
 		driver.findElement(By.id("login")).click();
-		driver.findElement(By.id("email")).sendKeys("admin1@gmail.com");
-		driver.findElement(By.id("password")).sendKeys("admin1");
+		driver.findElement(By.id("email")).sendKeys("no-reply@gmail.com");
+		driver.findElement(By.id("password")).sendKeys("nopass");
 		driver.findElement(By.id("btn-submit")).click();
 		
-		driver.findElement(By.id("create_post")).click();
+		String currentMessage = driver.findElement(By.xpath("//*[@id=\"content_title\"]/form/div[1]/div/span[2]")).getText();
+		assertEquals("Invalid email or password.", currentMessage);
 		
-		String currentUrl = driver.getCurrentUrl();
 		
-		assertTrue(currentUrl.contains("/entries/create/"));
 	}
 	
 	@After
